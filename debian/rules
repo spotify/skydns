@@ -1,0 +1,26 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+export GOPATH=$(CURDIR)/gopath
+export PKGDIR=$(GOPATH)/src/github.com/skynetservices
+
+%:
+	dh $@ 
+
+override_dh_auto_clean:
+	dh_auto_clean
+	rm -rf $(GOPATH)
+
+override_dh_auto_build:
+	mkdir -p $(GOPATH)
+	go get -d -v ./...
+	
+	if [ ! -h $(PKGDIR)/skydns ]; then \
+		mkdir -p $(PKGDIR); \
+		ln -sf $(CURDIR) $(PKGDIR)/skydns; \
+	fi
+	
+	go install github.com/skynetservices/skydns

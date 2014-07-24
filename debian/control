@@ -1,0 +1,16 @@
+Source: skydns
+Section: net
+Priority: optional
+Maintainer: Rohan Singh <rohan@spotify.com>
+Build-Depends: debhelper (>= 8.0.0), golang, git, mercurial, bzr
+Standards-Version: 3.9.4
+Homepage: https://github.com/skynetservices/skydns
+Vcs-Browser: https://github.com/skynetservices/skydns.git
+
+Package: skydns
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: DNS service discovery for etcd
+ SkyDNS is a distributed service for announcement and discovery of services built on top of etcd.
+ It utilizes DNS queries to discover available services. This is done by leveraging SRV records in
+ DNS, with special meaning given to subdomains, priorities and weights.
